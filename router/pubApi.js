@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router();
 const lodash=require('lodash')
-const catSchema = require('../models/catigories.js')
+const pubSchema = require('../models/pub.js')
 
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 
 // async function func(){
-//     var cat = await create({
+//     var pub = await create({
 //       name:"automobiles",
 //       types:["voitures","car"],
 //       carc:[{type:"pegeot", refs:['206',"205","106"]}],
@@ -15,39 +15,39 @@ const jwt=require('jsonwebtoken');
 
 
 //     })
-//     var cat = await create( {
+//     var pub = await create( {
 //         name:"immobliers",
 //         types:["vila","aprtement","dublex"],
 //         carc:[],
-//         options:["bathroom","bedRoom","kkkkk"],
+//         options:["bathrcatchm","bedRcatchm","kkkkk"],
   
   
 //       })
 
 // }
 // func()
-console.log("declarer super cat")
+console.log("declarer super pub")
 router.post('/', async (req, res) => {
   
-   var cat= await catSchema.create( req.body)
-   res.send(cat)
+   var pub= await pubSchema.create( req.body)
+   res.send(pub)
     
 });
 router.get('/', async (req, res) => {
   
-    var cat= await catSchema.find()
-    res.send(cat)
+    var pub= await pubSchema.find()
+    res.send(pub)
      
  });
 router.get('/:id', async (req, res) => {
   
-    var cat= await catSchema.findById(req.params.id)
-    res.send(cat)
+    var pub= await pubSchema.findById(req.params.id)
+    res.send(pub)
      
  });
 router.put('/:id', async (req, res) => {
     try{
-        var  cat = await catSchema.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        var  pub = await pubSchema.findByIdAndUpdate(req.params.id, req.body, { new: true })
  
         res.send({message:true})
    
@@ -60,9 +60,9 @@ router.put('/:id', async (req, res) => {
 });
 router.delete('/:id', async (req, res) => {
     try{
-        const catDelete = await catSchema.deleteOne({ _id: req.params.id }).then(async (group) => {
-            var cats = await   catSchema.find();
-            res.send(cats)
+        const pubDelete = await pubSchema.deleteOne({ _id: req.params.id }).then(async (group) => {
+            var pubs = await   pubSchema.find();
+            res.send(pubs)
           })
         
    

@@ -15,7 +15,9 @@ app.use(express.json({ extended: false, limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: false, parameterLimit: 50000 }))
  const connect = require('./dataBase/connect')
 const user=require('./router/userApi')
-
+const prod=require('./router/prodApi.js')
+const pub=require('./router/pubApi.js')
+const cat=require('./router/catigorieApi.js')
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -23,6 +25,9 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/user',user);
+app.use('/prod',prod);
+app.use('/cat',cat);
+app.use('/pub',pub);
 
 //routes
 // "bcrypt": "^5.0.0",

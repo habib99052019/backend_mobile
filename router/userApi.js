@@ -26,24 +26,20 @@ router.get('/:id', async (req, res) => {
 
 router.post('/adduser', async (req, res) => {
     try{
-        var user = await userSchema.findOne({login:req.body.login});
+        var user = await userSchema.findOne({email:req.body.email});
 
 
     if(!user)
        
    { 
     var user =  await  userSchema.create(req.body)
-    await userSchema.findByIdAndUpdate(user._id,{hist:[],resultatRoulette:0}, { new: true })
+   // await userSchema.findByIdAndUpdate(user._id,{hist:[],resultatRoulette:0}, { new: true })
     const saltRounds = 10;
     const salt = bcrypt.genSalt(saltRounds)
    user.password = await bcrypt.hash(user.password, saltRounds);// pour crypter password
 
    await  user.save();
-   if(user.role=="user"){
-
    
-   await userSchema.findByIdAndUpdate({ _id:req.body.superuser }, { $push: { users: user._id } })
-   }
    return res.send({
        message: true,
        id: user._id
@@ -95,6 +91,41 @@ router.delete('/:id', async (req, res) => {
     }
     
 });
+router.post('/login', async (req, res) => {
+   
+   
+    try {
+        var user = await userSchema.findOne({ email: req.body.email })
 
+         
+        if (user) {
+            console.log(user,12);
+           const  test = await bcrypt.compare(req.body.password, user.password)
+                console.log(test ,5)
+            if (test) {
+                var token = jwt.sign({ _id: user._id }, 'privateKey', { expiresIn: '1d' })
+
+                console.log(user);
+                // res.send({token: token})  pour envoyer comme objet  json 
+                res.header('Authorization', token).send({ 
+                    message: true , 
+                    user: user._id,
+                    //role:user.role,
+                      token: token })
+            }
+            else { //res.status(201).send("mots de passe incorrect")
+                return res.send({ message: false })
+            }
+
+        }
+        else {
+            return /*res.status(401).send("email ou mots ded passe incorrect").*/res.send({ message: false })
+        }
+
+    } catch (error) {
+        res.send(error.message)
+    }
+
+});
 
 module.exports = router;
