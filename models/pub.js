@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const  podSchema  = new mongoose.Schema({
+const  pubSchema  = new mongoose.Schema({
    
     title:String,
     description:String,

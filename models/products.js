@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const  podSchema  = new mongoose.Schema({
+const  prodSchema  = new mongoose.Schema({
    
     title:String,
     userPosterId:{ type: Schema.Types.ObjectId, ref:'userSchema'}, // id user li habit l post
