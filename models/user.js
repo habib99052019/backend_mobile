@@ -12,7 +12,12 @@ const  userSchema  = new mongoose.Schema({
     favorites:[],
     active:Boolean,
     ville:String,
-    city:String 
+    city:String ,
+    localistion:{
+      lang:Number,
+      long:Number
+
+    }
    
   });
 module.exports=mongoose.model('userSchema',userSchema);

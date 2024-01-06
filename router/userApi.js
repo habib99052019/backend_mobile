@@ -5,13 +5,13 @@ const userSchema = require('../models/user.js')
 
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
-async function func(){
-    var user = await userSchema.find()
-    console.log(user)
+// async function func(){
+//     var user = await userSchema.find()
+//     console.log(user)
 
-}
-func()
-console.log("declarer super user")
+// }
+// func()
+// console.log("declarer super user")
 router.get('/', async (req, res) => {
   
     var users = await userSchema.find()
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-    var user=  await userSchema.findById(req.params.id).populate('Listejoueurs').populate('users');
+    var user=  await userSchema.findById(req.params.id).populate('products');
     res.send(user)
 })
 
