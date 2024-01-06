@@ -5,7 +5,7 @@ const app = express();//kima hekka express module  le routre
 //llll
 //activer les api
 //aaaa
-const port=3000//y
+//const port=3000//y
 app.use(express.json({ extended: false, limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: false, parameterLimit: 50000 }))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -39,4 +39,7 @@ app.use('/user',user);
 // "sync": "^0.2.5",
 // "synchronous-promise": "^2.0.15",
 // "xlsx": "^0.17.1"
-app.listen(port,'127.0.0.1',()=>console.log('Server listen on the port ',port)) ;
+// app.listen(port,'127.0.0.1',()=>console.log('Server listen on the port ',port)) ;
+
+const port = process.env.PORT || 5900;
+app.listen(port,()=>console.log(`Server listen on the port ${port}`)) ;
