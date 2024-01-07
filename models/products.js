@@ -11,8 +11,8 @@ const  prodSchema  = new mongoose.Schema({
     caractes:[],
     chat:[], /// kol produits aandou chat mte3ou ynijmou ykalmou akthir min wehed aala produit mte3ou,
     reviews:[],
-    // ville:String,
-    // city:String, /// kol produit aandou review mte3ou list fergha khaleha kima chat w caractes
+     ville:String,
+    city:String, /// kol produit aandou review mte3ou list fergha khaleha kima chat w caractes
     catigories:String
   });
 module.exports=mongoose.model('prodSchema',prodSchema);
